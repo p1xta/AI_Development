@@ -15,7 +15,7 @@ MIN_RADIUS = 10
 MAX_RADIUS = 50
 
 def load_image(img_path = None):
-    # if no path was passed, returns and image of coins
+    # if no path was passed, returns an image of coins
     if img_path is None:
         return data.coins()
     
