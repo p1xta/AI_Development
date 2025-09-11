@@ -5,12 +5,7 @@
 2. Далее cv2.HoughCircles находит круги
 3. После этого круги рисуются на исходном черно-белом изображении
 
-* Чтобы выбрать свое изображение для обработки, укажите в строке 56 в функции `load_image()` путь к нему:
+Использование:
 ```
-image = load_image(img_path="path/to/your/image.png")
-```
-
-* Чтобы сохранить изображение не в текущую директорию, передайте путь к нужному файлу в функцию `save_image()` в строке 60:
-```
-save_image(img_output_path="path/to/your/image.png", image=image_with_circles)
+python CV-1-09.py --img_path path/to/your/input/image.png --img_output_path path/to/your/output/image.png
 ```

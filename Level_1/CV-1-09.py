@@ -1,3 +1,5 @@
+import argparse
+
 from skimage import data
 import matplotlib.pyplot as plt
 import cv2
@@ -28,7 +30,7 @@ def load_image(img_path = None):
 
 def save_image(image, img_output_path = "image_with_circles.png"):
     try:
-        cv2.imsave(img_output_path, image)
+        cv2.imwrite(img_output_path, image)
     except Exception as e:
         print(f"Could not save image: {e}")
 
@@ -58,8 +60,14 @@ def find_circles(image):
 
 
 if __name__ == "__main__":
-    image = load_image()
-    print(f"Coins image shape: {image.shape}")
+
+    parser = argparse.ArgumentParser(description="Поиск кругов на изображении с помощью преобразования Хафа")
+    parser.add_argument("--img_path", type=str, default=None, help="Путь к входному изображению (по умолчанию встроенное изображение монет)")
+    parser.add_argument("--img_output_path", type=str, default="image_with_circles.png", help="Путь для сохранения результата")
+
+    args = parser.parse_args()
+
+    image = load_image(args.img_path)
 
     image_with_circles = find_circles(image)
-    save_image(image=image_with_circles)
+    save_image(image=image_with_circles, img_output_path=args.img_output_path)
