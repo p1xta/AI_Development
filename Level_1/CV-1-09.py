@@ -18,8 +18,13 @@ def load_image(img_path = None):
     # if no path was passed, returns and image of coins
     if img_path is None:
         return data.coins()
+    
+    try:
+       image = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+    except Exception as e:
+        print(f"Could not load image: {e}")
 
-    return cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+    return image
 
 def save_image(image, img_output_path = "image_with_circles.png"):
     try:
