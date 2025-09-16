@@ -1,7 +1,6 @@
 import argparse
 
 from skimage import data
-import matplotlib.pyplot as plt
 import cv2
 
 
@@ -17,7 +16,16 @@ MIN_RADIUS = 10
 MAX_RADIUS = 50
 
 def load_image(img_path = None):
-    # if no path was passed, returns an image of coins
+    """
+    Loads an image in grayscale.
+
+    Args:
+        img_path (str, optional): Path to input image. 
+            If None — loads an image of coins from skimage library.
+
+    Returns:
+        numpy.ndarray: Image in grayscale.
+    """
     if img_path is None:
         return data.coins()
     
@@ -29,12 +37,32 @@ def load_image(img_path = None):
     return image
 
 def save_image(image, img_output_path = "image_with_circles.png"):
+    """
+    Saves an image to file.
+
+    Args:
+        image (numpy.ndarray): Image to save.
+        img_output_path (str, optional): Path to file, where an image will be saved.
+            default - "image_with_circles.png".
+
+    Returns:
+        None
+    """
     try:
         cv2.imwrite(img_output_path, image)
     except Exception as e:
         print(f"Could not save image: {e}")
 
 def find_circles(image):
+    """
+    Finds circles on the image using Hough algorithm.
+
+    Args:
+        image (numpy.ndarray): Input image in grayscale.
+
+    Returns:
+        numpy.ndarray: Image with drawn circles (in colour).
+    """
     # find edges on the image
     image_with_edges = cv2.Canny(image, threshold1=THRESHOLD1, threshold2=THRESHOLD2) 
 
