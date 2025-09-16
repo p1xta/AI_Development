@@ -7,13 +7,21 @@
 
 Использование:
 1. Clone the repository:
-` git clone `
+```
+git clone
+```
 
 2. Go to Level_1 task folder:
-`cd Level_1`
+```
+cd Level_1
+```
 
 3. Install requirements: 
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 4. Run CV-1-09.py script:
-`python CV-1-09.py --img_path path/to/your/input/image.png --img_output_path path/to/your/output/image.png`
+```
+python CV-1-09.py --img_path path/to/your/input/image.png --img_output_path path/to/your/output/image.png
+```
