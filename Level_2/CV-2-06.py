@@ -18,7 +18,6 @@ def load_img(file_path):
     :return: image - изображение
              None - если файл не найден или загрузка не удалась.
     """
-
     if not os.path.exists(file_path):
         print("Error: file not found\n")
         return None
@@ -57,7 +56,6 @@ def create_mask(image_hsv, lower_color_green = np.array([35, 40, 40]),
         где зеленые области из исходного изображения черные,
         а все остальное белое.
     """
-
     mask_ = cv2.inRange(image_hsv, lower_color_green, upper_color_green)
     inv_mask = cv2.bitwise_not(mask_)
 
@@ -77,7 +75,6 @@ def final_img(image, mask_, f_res):
     :param mask_: бинарная маска, применяемая к изображению
     :param f_res: путь и имя файла для сохранения результата
     """
-
     result = cv2.bitwise_and(image, image, mask=mask_)
 
     cv2.imwrite(f_res, result)
