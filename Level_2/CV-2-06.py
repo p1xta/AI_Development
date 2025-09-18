@@ -20,13 +20,13 @@ def load_img(file_path):
     """
 
     if not os.path.exists(file_path):
-        print("error: file not found\n")
+        print("Error: file not found\n")
         return None
 
     image = cv2.imread(file_path, cv2.IMREAD_COLOR)
 
     if image is None:
-        print("error: the image was not uploaded\n")
+        print("Error: the image was not uploaded\n")
         return None
 
     return image
@@ -61,11 +61,10 @@ def create_mask(image_hsv, lower_color_green = np.array([35, 40, 40]),
     mask_ = cv2.inRange(image_hsv, lower_color_green, upper_color_green)
     inv_mask = cv2.bitwise_not(mask_)
 
-    kernel = np.ones(kernel_size, np.uint8)
-    # inv_mask = cv2.morphologyEx(inv_mask, cv2.MORPH_OPEN, kernel)  # удаление шумов
-    # inv_mask = cv2.morphologyEx(inv_mask, cv2.MORPH_CLOSE, kernel)  # закрытие дыр
-    inv_mask = cv2.morphologyEx(inv_mask, cv2.MORPH_OPEN, kernel)
-    inv_mask = cv2.dilate(inv_mask, kernel, iterations=DILATE_ITERS)
+    # kernel = np.ones(kernel_size, np.uint8)
+
+    # inv_mask = cv2.morphologyEx(inv_mask, cv2.MORPH_OPEN, kernel) # даление шумов
+    # inv_mask = cv2.dilate(inv_mask, kernel, iterations=DILATE_ITERS) # расширение маски
 
     return inv_mask
 
@@ -88,16 +87,12 @@ def final_img(image, mask_, f_res):
     plt.show()
 
 
-def main():
+if __name__ == "__main__":
     file_input = input("Enter input image path: ")
     file_output = input("Enter output image path: ")
 
     img = load_img(file_input)
 
-    if img is not None:
-        img_hsv = brg_to_hsv(img)
-        mask = create_mask(img_hsv)
-        final_img(img, mask, file_output)
-
-
-main()
+    img_hsv = brg_to_hsv(img)
+    mask = create_mask(img_hsv)
+    final_img(img, mask, file_output)
