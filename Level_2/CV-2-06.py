@@ -61,10 +61,10 @@ def create_mask(image_hsv, lower_color_green = np.array([35, 40, 40]),
     mask_ = cv2.inRange(image_hsv, lower_color_green, upper_color_green)
     inv_mask = cv2.bitwise_not(mask_)
 
-    # kernel = np.ones(kernel_size, np.uint8)
+    kernel = np.ones(kernel_size, np.uint8)
 
-    # inv_mask = cv2.morphologyEx(inv_mask, cv2.MORPH_OPEN, kernel) # даление шумов
-    # inv_mask = cv2.dilate(inv_mask, kernel, iterations=DILATE_ITERS) # расширение маски
+    inv_mask = cv2.morphologyEx(inv_mask, cv2.MORPH_OPEN, kernel) # даление шумов
+    inv_mask = cv2.dilate(inv_mask, kernel, iterations=DILATE_ITERS) # расширение маски
 
     return inv_mask
 
